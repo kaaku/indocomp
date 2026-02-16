@@ -6,6 +6,43 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 @use '@funidata/fudis-core';
+@use '@funidata/fudis-core/styles';
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('../fonts/FiraSans-Light.woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('../fonts/FiraSans-Regular.woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('../fonts/FiraSans-Medium.woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('../fonts/FiraSans-SemiBold.woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+:root {
+  --fudis-color-primary-extra-dark: var(--mat-sys-on-primary-fixed);
+  --fudis-color-primary-dark: var(--mat-sys-on-primary-fixed-variant);
+  --fudis-color-primary: var(--mat-sys-primary);
+  --fudis-color-primary-light: var(--mat-sys-primary-container);
+  --fudis-rem-multiplier: 1;
+}
 
 html {
   height: 100%;
