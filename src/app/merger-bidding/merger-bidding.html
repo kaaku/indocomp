@@ -1,3 +1,49 @@
-<fudis-heading [level]="1">
-  Merger bidding
-</fudis-heading>
+<fudis-grid>
+  <fudis-heading [level]="1">
+    Merger bidding
+  </fudis-heading>
+  <form>
+    <fudis-grid [columns]="2">
+      <fieldset fudisGridItem [columns]="2">
+        <legend>Company type</legend>
+        <label>
+          <input type="radio" value="shipping" [formField]="biddingForm.companyType"/>
+          Shipping
+        </label>
+        <label>
+          <input type="radio" value="rice" [formField]="biddingForm.companyType"/>
+          Rice
+        </label>
+        <label>
+          <input type="radio" value="spice" [formField]="biddingForm.companyType"/>
+          Spice
+        </label>
+        <label>
+          <input type="radio" value="rice_spice" [formField]="biddingForm.companyType"/>
+          Rice & Spice -> Siap saji
+        </label>
+        <label>
+          <input type="radio" value="siap_saji" [formField]="biddingForm.companyType"/>
+          Siap saji
+        </label>
+        <label>
+          <input type="radio" value="rubber" [formField]="biddingForm.companyType"/>
+          Rubber
+        </label>
+        <label>
+          <input type="radio" value="oil" [formField]="biddingForm.companyType"/>
+          Oil
+        </label>
+      </fieldset>
+      <label>
+        Company A ships/plantations
+        <input type="number" step="1" [formField]="biddingForm.companyAGoods"/>
+      </label>
+      <label>
+        Company B ships/plantations
+        <input type="number" step="1" [formField]="biddingForm.companyBGoods"/>
+      </label>
+    </fudis-grid>
+  </form>
+</fudis-grid>
+
