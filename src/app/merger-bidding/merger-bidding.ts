@@ -30,7 +30,7 @@ const GOOD_VALUE_BY_MERGER_TYPE: Record<MergerType, number> = {
 })
 export class MergerBidding {
 
-  protected readonly biddingModel = signal<BiddingData>({
+  private readonly biddingModel = signal<BiddingData>({
     companyAGoods: 0,
     companyBGoods: 0,
     mergerType: '',
@@ -50,6 +50,6 @@ export class MergerBidding {
     return [
       nominalValue,
       ...Array.from({length: 40}).map((_, i) => nominalValue + (i + 1) * totalGoods),
-    ].map(value => value.toString());
+    ].map(String);
   });
 }
