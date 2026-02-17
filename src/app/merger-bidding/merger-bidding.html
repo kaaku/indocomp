@@ -3,8 +3,8 @@
     Merger bidding
   </fudis-heading>
   <form>
-    <fudis-grid [columns]="2">
-      <fieldset fudisGridItem [columns]="2">
+    <fudis-grid>
+      <fieldset>
         <legend>Merger type</legend>
         <label>
           <input type="radio" value="shipping" [formField]="biddingForm.mergerType"/>
@@ -35,16 +35,21 @@
           Oil
         </label>
       </fieldset>
-      <label>
-        Company A ships/plantations
-        <input type="number" step="1" [formField]="biddingForm.companyAGoods"/>
-      </label>
-      <label>
-        Company B ships/plantations
-        <input type="number" step="1" [formField]="biddingForm.companyBGoods"/>
-      </label>
+      <fieldset>
+        <legend>Amount of ships/plantations</legend>
+        <fudis-grid [columns]="2">
+          <label class="fudis-d-block">
+            Company A
+            <input type="number" step="1" [formField]="biddingForm.companyAGoods"/>
+          </label>
+          <label>
+            Company B
+            <input type="number" step="1" [formField]="biddingForm.companyBGoods"/>
+          </label>
+        </fudis-grid>
+      </fieldset>
       @if (validBids().length > 0) {
-        <fieldset fudisGridItem [columns]="2">
+        <fieldset>
           <legend>Valid bids</legend>
           @for (bid of validBids(); track bid) {
             <label>
