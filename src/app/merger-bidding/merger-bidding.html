@@ -43,6 +43,17 @@
         Company B ships/plantations
         <input type="number" step="1" [formField]="biddingForm.companyBGoods"/>
       </label>
+      @if (validBids().length > 0) {
+        <fieldset fudisGridItem [columns]="2">
+          <legend>Valid bids</legend>
+          @for (bid of validBids(); track bid) {
+            <label>
+              <input type="radio" [value]="bid" [formField]="biddingForm.winningBid"/>
+              {{bid}} rp
+            </label>
+          }
+        </fieldset>
+      }
     </fudis-grid>
   </form>
 </fudis-grid>
