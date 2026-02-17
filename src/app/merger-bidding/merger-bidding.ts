@@ -2,16 +2,16 @@ import {Component, computed, signal} from '@angular/core';
 import {form, FormField} from "@angular/forms/signals";
 import {NgxFudisModule} from '@funidata/ngx-fudis';
 
-type CompanyType = '' | 'shipping' | 'rice' | 'spice' | 'rice_spice' | 'siap_saji' | 'rubber' | 'oil';
+type MergerType = '' | 'shipping' | 'rice' | 'spice' | 'rice_spice' | 'siap_saji' | 'rubber' | 'oil';
 
 interface BiddingData {
   companyAGoods: number;
   companyBGoods: number;
-  companyType: CompanyType;
+  mergerType: MergerType;
   winningBid: string;
 }
 
-const GOOD_VALUE_BY_COMPANY_TYPE: Record<CompanyType, number> = {
+const GOOD_VALUE_BY_MERGER_TYPE: Record<MergerType, number> = {
   '': 0,
   'shipping': 10,
   'rice': 20,
@@ -33,20 +33,20 @@ export class MergerBidding {
   protected readonly biddingModel = signal<BiddingData>({
     companyAGoods: 0,
     companyBGoods: 0,
-    companyType: '',
+    mergerType: '',
     winningBid: '',
   });
 
   protected readonly biddingForm = form(this.biddingModel);
 
   protected readonly validBids = computed<string[]>(() => {
-    const {companyAGoods, companyBGoods, companyType} = this.biddingModel()
-    if (companyAGoods === 0 || companyBGoods === 0 || companyType === '') {
+    const {companyAGoods, companyBGoods, mergerType} = this.biddingModel()
+    if (companyAGoods === 0 || companyBGoods === 0 || mergerType === '') {
       return [];
     }
 
     const totalGoods = companyAGoods + companyBGoods;
-    const nominalValue = GOOD_VALUE_BY_COMPANY_TYPE[companyType] * totalGoods;
+    const nominalValue = GOOD_VALUE_BY_MERGER_TYPE[mergerType] * totalGoods;
     return [
       nominalValue,
       ...Array.from({length: 40}).map((_, i) => nominalValue + (i + 1) * totalGoods),
