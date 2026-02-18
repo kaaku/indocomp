@@ -1,7 +1,14 @@
 <fudis-grid>
-  <fudis-heading [level]="1">
-    Merger bidding
-  </fudis-heading>
+  <div class="heading-container">
+    <fudis-heading [level]="1">
+      Merger bidding
+    </fudis-heading>
+    <fudis-button
+      [label]="'Reset'"
+      [variant]="'secondary'"
+      (handleClick)="resetForm()"
+    />
+  </div>
   <form>
     <fudis-grid>
       <fieldset>
@@ -38,7 +45,7 @@
       <fieldset>
         <legend>Amount of ships/plantations</legend>
         <fudis-grid [columns]="2">
-          <label class="fudis-d-block">
+          <label>
             Company A
             <input type="number" step="1" [formField]="biddingForm.companyAGoods"/>
           </label>
@@ -54,7 +61,7 @@
           @for (bid of validBids(); track bid) {
             <label>
               <input type="radio" [value]="bid" [formField]="biddingForm.winningBid"/>
-              {{bid}} rp
+              {{ bid }} rp
             </label>
           }
         </fieldset>

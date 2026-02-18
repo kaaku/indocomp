@@ -27,6 +27,13 @@ const GOOD_VALUE_BY_MERGER_TYPE: Record<MergerType, number> = {
   'oil': 40,
 }
 
+const INITIAL_DATA: BiddingData = {
+  companyAGoods: 0,
+  companyBGoods: 0,
+  mergerType: '',
+  winningBid: '',
+}
+
 @Component({
   selector: 'app-merger-bidding',
   imports: [NgxFudisModule, FormField],
@@ -35,12 +42,7 @@ const GOOD_VALUE_BY_MERGER_TYPE: Record<MergerType, number> = {
 })
 export class MergerBidding {
 
-  private readonly biddingModel = signal<BiddingData>({
-    companyAGoods: 0,
-    companyBGoods: 0,
-    mergerType: '',
-    winningBid: '',
-  });
+  private readonly biddingModel = signal<BiddingData>({...INITIAL_DATA});
 
   protected readonly biddingForm = form(this.biddingModel);
 
@@ -70,4 +72,8 @@ export class MergerBidding {
       companyBShare: (companyBGoods / totalGoods) * Number(winningBid),
     };
   });
+
+  resetForm() {
+    this.biddingModel.set({...INITIAL_DATA});
+  }
 }
