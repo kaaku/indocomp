@@ -12,39 +12,41 @@
   <form>
     <fudis-grid>
       <fieldset>
-        <legend>Merger type</legend>
-        <label>
-          <input type="radio" value="shipping" [formField]="biddingForm.mergerType"/>
-          Shipping
-        </label>
-        <label>
-          <input type="radio" value="rice" [formField]="biddingForm.mergerType"/>
-          Rice
-        </label>
-        <label>
-          <input type="radio" value="spice" [formField]="biddingForm.mergerType"/>
-          Spice
-        </label>
-        <label>
-          <input type="radio" value="rice_spice" [formField]="biddingForm.mergerType"/>
-          Rice & Spice -> Siap saji
-        </label>
-        <label>
-          <input type="radio" value="siap_saji" [formField]="biddingForm.mergerType"/>
-          Siap saji
-        </label>
-        <label>
-          <input type="radio" value="rubber" [formField]="biddingForm.mergerType"/>
-          Rubber
-        </label>
-        <label>
-          <input type="radio" value="oil" [formField]="biddingForm.mergerType"/>
-          Oil
-        </label>
+        <fudis-grid [rowGap]="'xs'">
+          <legend>Merger type</legend>
+          <label>
+            <input type="radio" value="shipping" [formField]="biddingForm.mergerType"/>
+            Shipping
+          </label>
+          <label>
+            <input type="radio" value="rice" [formField]="biddingForm.mergerType"/>
+            Rice
+          </label>
+          <label>
+            <input type="radio" value="spice" [formField]="biddingForm.mergerType"/>
+            Spice
+          </label>
+          <label>
+            <input type="radio" value="rice_spice" [formField]="biddingForm.mergerType"/>
+            Rice & Spice -> Siap saji
+          </label>
+          <label>
+            <input type="radio" value="siap_saji" [formField]="biddingForm.mergerType"/>
+            Siap saji
+          </label>
+          <label>
+            <input type="radio" value="rubber" [formField]="biddingForm.mergerType"/>
+            Rubber
+          </label>
+          <label>
+            <input type="radio" value="oil" [formField]="biddingForm.mergerType"/>
+            Oil
+          </label>
+        </fudis-grid>
       </fieldset>
       <fieldset>
-        <legend>Amount of ships/plantations</legend>
-        <fudis-grid [columns]="2">
+        <fudis-grid [columns]="2" [rowGap]="'xs'">
+          <legend fudisGridItem [columns]="2">Amount of ships/plantations</legend>
           <label>
             Company A
             <input type="number" step="1" [formField]="biddingForm.companyAGoods"/>
@@ -57,13 +59,15 @@
       </fieldset>
       @if (validBids().length > 0) {
         <fieldset>
-          <legend>Valid bids</legend>
-          @for (bid of validBids(); track bid) {
-            <label>
-              <input type="radio" [value]="bid" [formField]="biddingForm.winningBid"/>
-              {{ bid }} rp
-            </label>
-          }
+          <fudis-grid [rowGap]="'xs'">
+            <legend>Valid bids</legend>
+            @for (bid of validBids(); track bid) {
+              <label>
+                <input type="radio" [value]="bid" [formField]="biddingForm.winningBid"/>
+                {{ bid }} rp
+              </label>
+            }
+          </fudis-grid>
         </fieldset>
       }
     </fudis-grid>
