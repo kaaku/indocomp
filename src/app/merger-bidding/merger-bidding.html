@@ -61,5 +61,16 @@
       }
     </fudis-grid>
   </form>
+  @if (paymentDistribution() !== null) {
+    <fudis-heading [level]="2">
+      Payment distribution
+    </fudis-heading>
+    <fudis-body-text>
+      Owner of company A gets <strong>{{ paymentDistribution()?.companyAShare }} rp</strong>
+    </fudis-body-text>
+    <fudis-body-text>
+      Owner of company B gets <strong>{{ paymentDistribution()?.companyBShare }} rp</strong>
+    </fudis-body-text>
+  }
 </fudis-grid>
 

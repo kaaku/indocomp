@@ -11,6 +11,11 @@ interface BiddingData {
   winningBid: string;
 }
 
+interface PaymentDistribution {
+  companyAShare: number;
+  companyBShare: number;
+}
+
 const GOOD_VALUE_BY_MERGER_TYPE: Record<MergerType, number> = {
   '': 0,
   'shipping': 10,
@@ -51,5 +56,18 @@ export class MergerBidding {
       nominalValue,
       ...Array.from({length: 40}).map((_, i) => nominalValue + (i + 1) * totalGoods),
     ].map(String);
+  });
+
+  protected readonly paymentDistribution = computed<PaymentDistribution | null>(() => {
+    const {companyAGoods, companyBGoods, winningBid} = this.biddingModel();
+    if (companyAGoods === 0 || companyBGoods === 0 || winningBid === '') {
+      return null;
+    }
+
+    const totalGoods = companyAGoods + companyBGoods;
+    return {
+      companyAShare: (companyAGoods / totalGoods) * Number(winningBid),
+      companyBShare: (companyBGoods / totalGoods) * Number(winningBid),
+    };
   });
 }
