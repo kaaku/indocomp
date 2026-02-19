@@ -1,0 +1,14 @@
+<div class="fudis-text-input fudis-input-size__md">
+  <label class="fudis-label" [attr.for]="id">
+    <div class="fudis-label__content">
+      <span class="fudis-label__content__text">{{ label() }}</span>
+    </div>
+  </label>
+  <input
+    [value]="value()"
+    (input)="onInput($event)"
+    [attr.id]="id"
+    type="number"
+    class="fudis-form-input fudis-text-input__input"
+  />
+</div>
