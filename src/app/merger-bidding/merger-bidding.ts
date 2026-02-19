@@ -1,6 +1,7 @@
 import {Component, computed, signal} from '@angular/core';
 import {form, FormField} from "@angular/forms/signals";
 import {NgxFudisModule} from '@funidata/ngx-fudis';
+import {NumberInput} from '../number-input/number-input';
 
 type MergerType = '' | 'shipping' | 'rice' | 'spice' | 'rice_spice' | 'siap_saji' | 'rubber' | 'oil';
 
@@ -36,7 +37,7 @@ const INITIAL_DATA: BiddingData = {
 
 @Component({
   selector: 'app-merger-bidding',
-  imports: [NgxFudisModule, FormField],
+  imports: [NgxFudisModule, FormField, NumberInput],
   templateUrl: './merger-bidding.html',
   styleUrl: './merger-bidding.scss',
 })

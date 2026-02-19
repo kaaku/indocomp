@@ -47,14 +47,14 @@
       <fieldset>
         <fudis-grid [columns]="2" [rowGap]="'xs'">
           <legend fudisGridItem [columns]="2">Amount of ships/plantations</legend>
-          <label>
-            Company A
-            <input type="number" step="1" [formField]="biddingForm.companyAGoods"/>
-          </label>
-          <label>
-            Company B
-            <input type="number" step="1" [formField]="biddingForm.companyBGoods"/>
-          </label>
+          <app-number-input
+            [label]="'Company A'"
+            [formField]="biddingForm.companyAGoods"
+          />
+          <app-number-input
+            [label]="'Company B'"
+            [formField]="biddingForm.companyBGoods"
+          />
         </fudis-grid>
       </fieldset>
       @if (validBids().length > 0) {
