@@ -42,6 +42,14 @@
               [formField]="biddingForm.winningBid"
               [options]="validBids()"
             />
+            <fudis-button
+              [label]="'Show more bids'"
+              [variant]="'secondary'"
+              [icon]="'plus'"
+              (handleClick)="onShowMoreBids()"
+              fudisGridItem
+              [alignSelfX]="'center'"
+            />
           </fudis-grid>
         </fieldset>
       }

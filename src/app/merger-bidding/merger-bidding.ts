@@ -37,6 +37,9 @@ const INITIAL_DATA: BiddingData = {
   winningBid: '',
 }
 
+const DEFAULT_VISIBLE_BIDS = 40;
+const VISIBLE_BIDS_INCREMENT = 20;
+
 @Component({
   selector: 'app-merger-bidding',
   imports: [NgxFudisModule, FormField, NumberInput, RadioButtonGroup, RadioButtonImageGroup],
@@ -101,8 +104,10 @@ export class MergerBidding {
 
   protected readonly biddingForm = form(this.biddingModel);
 
+  protected readonly visibleBids = signal<number>(DEFAULT_VISIBLE_BIDS);
+
   protected readonly validBids = computed<RadioButtonOption[]>(() => {
-    const {companyAGoods, companyBGoods, mergerType} = this.biddingModel()
+    const {companyAGoods, companyBGoods, mergerType} = this.biddingModel();
     if (companyAGoods === 0 || companyBGoods === 0 || mergerType === '') {
       return [];
     }
@@ -111,7 +116,7 @@ export class MergerBidding {
     const nominalValue = GOOD_VALUE_BY_MERGER_TYPE[mergerType] * totalGoods;
     return [
       nominalValue,
-      ...Array.from({length: 40}).map((_, i) => nominalValue + (i + 1) * totalGoods),
+      ...Array.from({length: this.visibleBids()}).map((_, i) => nominalValue + (i + 1) * totalGoods),
     ].map(bid => ({label: `${bid} rp`, value: bid.toString()}));
   });
 
@@ -130,5 +135,10 @@ export class MergerBidding {
 
   resetForm() {
     this.biddingModel.set({...INITIAL_DATA});
+    this.visibleBids.set(DEFAULT_VISIBLE_BIDS);
+  }
+
+  onShowMoreBids() {
+    this.visibleBids.update(current => current + VISIBLE_BIDS_INCREMENT);
   }
 }
