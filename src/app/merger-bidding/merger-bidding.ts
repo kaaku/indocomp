@@ -3,6 +3,7 @@ import {form, FormField} from "@angular/forms/signals";
 import {NgxFudisModule} from '@funidata/ngx-fudis';
 import {NumberInput} from '../number-input/number-input';
 import {RadioButtonGroup, RadioButtonOption} from '../radio-button-group/radio-button-group';
+import {ImageOption, RadioButtonImageGroup} from '../radio-button-image-group/radio-button-image-group';
 
 type MergerType = '' | 'shipping' | 'rice' | 'spice' | 'rice_spice' | 'siap_saji' | 'rubber' | 'oil';
 
@@ -38,11 +39,63 @@ const INITIAL_DATA: BiddingData = {
 
 @Component({
   selector: 'app-merger-bidding',
-  imports: [NgxFudisModule, FormField, NumberInput, RadioButtonGroup],
+  imports: [NgxFudisModule, FormField, NumberInput, RadioButtonGroup, RadioButtonImageGroup],
   templateUrl: './merger-bidding.html',
   styleUrl: './merger-bidding.scss',
 })
 export class MergerBidding {
+
+  protected readonly mergerOptions: ImageOption[] = [
+    {
+      value: 'shipping',
+      path: 'img/shipping.png',
+      width: 100,
+      height: 100,
+      alt: 'Shipping Merger'
+    },
+    {
+      value: 'rice',
+      path: 'img/rice.png',
+      width: 100,
+      height: 100,
+      alt: 'Rice Merger'
+    },
+    {
+      value: 'spice',
+      path: 'img/spice.png',
+      width: 100,
+      height: 100,
+      alt: 'Spice Merger'
+    },
+    {
+      value: 'rice_spice',
+      path: 'img/rice_spice.png',
+      width: 100,
+      height: 100,
+      alt: 'Rice & Spice Merger'
+    },
+    {
+      value: 'siap_saji',
+      path: 'img/siap_saji.png',
+      width: 100,
+      height: 100,
+      alt: 'Siap Saji Merger'
+    },
+    {
+      value: 'rubber',
+      path: 'img/rubber.png',
+      width: 100,
+      height: 100,
+      alt: 'Rubber Merger'
+    },
+    {
+      value: 'oil',
+      path: 'img/oil.png',
+      width: 100,
+      height: 100,
+      alt: 'Oil Merger'
+    }
+  ];
 
   private readonly biddingModel = signal<BiddingData>({...INITIAL_DATA});
 

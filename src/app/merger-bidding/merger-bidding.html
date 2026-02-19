@@ -14,34 +14,11 @@
       <fieldset>
         <fudis-grid [rowGap]="'xs'">
           <legend>Merger type</legend>
-          <label>
-            <input type="radio" value="shipping" [formField]="biddingForm.mergerType"/>
-            Shipping
-          </label>
-          <label>
-            <input type="radio" value="rice" [formField]="biddingForm.mergerType"/>
-            Rice
-          </label>
-          <label>
-            <input type="radio" value="spice" [formField]="biddingForm.mergerType"/>
-            Spice
-          </label>
-          <label>
-            <input type="radio" value="rice_spice" [formField]="biddingForm.mergerType"/>
-            Rice & Spice -> Siap saji
-          </label>
-          <label>
-            <input type="radio" value="siap_saji" [formField]="biddingForm.mergerType"/>
-            Siap saji
-          </label>
-          <label>
-            <input type="radio" value="rubber" [formField]="biddingForm.mergerType"/>
-            Rubber
-          </label>
-          <label>
-            <input type="radio" value="oil" [formField]="biddingForm.mergerType"/>
-            Oil
-          </label>
+          <app-radio-button-image-group
+            [formField]="biddingForm.mergerType"
+            [options]="mergerOptions"
+            [columns]="{xs: 2, md: 3}"
+          />
         </fudis-grid>
       </fieldset>
       <fieldset>
