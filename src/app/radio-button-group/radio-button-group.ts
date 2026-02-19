@@ -18,9 +18,4 @@ export interface RadioButtonOption {
 export class RadioButtonGroup implements FormValueControl<string> {
   readonly options = input.required<RadioButtonOption[]>();
   readonly value = model<string>('');
-
-  protected onInput(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.value.set(input.value ?? '');
-  }
 }

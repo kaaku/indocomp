@@ -3,7 +3,7 @@
     <label class="fudis-radio-button">
       <input
         [value]="option.value"
-        (input)="onInput($event)"
+        (input)="value.set(option.value)"
         type="radio"
         class="fudis-radio-button__input"
       />
