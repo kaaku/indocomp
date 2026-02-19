@@ -1,0 +1,22 @@
+<fudis-grid [rowGap]="'xxs'">
+  @for (option of options(); track option.value) {
+    <label class="fudis-radio-button">
+      <input
+        [value]="option.value"
+        (input)="onInput($event)"
+        type="radio"
+        class="fudis-radio-button__input"
+      />
+      <div class="fudis-radio-button__content">
+        <div class="fudis-radio-button__content-wrapper">
+          <div class="fudis-radio-button__content__control">
+            @if (value() === option.value) {
+              <span class="fudis-radio-button__content__control__indicator"></span>
+            }
+          </div>
+        </div>
+        <span class="fudis-radio-button__label">{{ option.label }}</span>
+      </div>
+    </label>
+  }
+</fudis-grid>
