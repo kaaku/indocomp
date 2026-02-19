@@ -61,12 +61,10 @@
         <fieldset>
           <fudis-grid [rowGap]="'xs'">
             <legend>Valid bids</legend>
-            @for (bid of validBids(); track bid) {
-              <label>
-                <input type="radio" [value]="bid" [formField]="biddingForm.winningBid"/>
-                {{ bid }} rp
-              </label>
-            }
+            <app-radio-button-group
+              [formField]="biddingForm.winningBid"
+              [options]="validBids()"
+            />
           </fudis-grid>
         </fieldset>
       }

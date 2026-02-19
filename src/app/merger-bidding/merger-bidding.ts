@@ -2,6 +2,7 @@ import {Component, computed, signal} from '@angular/core';
 import {form, FormField} from "@angular/forms/signals";
 import {NgxFudisModule} from '@funidata/ngx-fudis';
 import {NumberInput} from '../number-input/number-input';
+import {RadioButtonGroup, RadioButtonOption} from '../radio-button-group/radio-button-group';
 
 type MergerType = '' | 'shipping' | 'rice' | 'spice' | 'rice_spice' | 'siap_saji' | 'rubber' | 'oil';
 
@@ -37,7 +38,7 @@ const INITIAL_DATA: BiddingData = {
 
 @Component({
   selector: 'app-merger-bidding',
-  imports: [NgxFudisModule, FormField, NumberInput],
+  imports: [NgxFudisModule, FormField, NumberInput, RadioButtonGroup],
   templateUrl: './merger-bidding.html',
   styleUrl: './merger-bidding.scss',
 })
@@ -47,7 +48,7 @@ export class MergerBidding {
 
   protected readonly biddingForm = form(this.biddingModel);
 
-  protected readonly validBids = computed<string[]>(() => {
+  protected readonly validBids = computed<RadioButtonOption[]>(() => {
     const {companyAGoods, companyBGoods, mergerType} = this.biddingModel()
     if (companyAGoods === 0 || companyBGoods === 0 || mergerType === '') {
       return [];
@@ -58,7 +59,7 @@ export class MergerBidding {
     return [
       nominalValue,
       ...Array.from({length: 40}).map((_, i) => nominalValue + (i + 1) * totalGoods),
-    ].map(String);
+    ].map(bid => ({label: `${bid} rp`, value: bid.toString()}));
   });
 
   protected readonly paymentDistribution = computed<PaymentDistribution | null>(() => {
