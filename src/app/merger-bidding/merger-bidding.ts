@@ -15,9 +15,7 @@ import {NgxFudisModule} from '@funidata/ngx-fudis';
 import {NumberInput} from '../number-input/number-input';
 import {RadioButtonGroup, RadioButtonOption} from '../radio-button-group/radio-button-group';
 import {RadioButtonImageGroup} from '../radio-button-image-group/radio-button-image-group';
-import {mergerOptions} from './merger-options';
-
-type MergerType = '' | 'shipping' | 'rice' | 'spice' | 'rice_spice' | 'siap_saji' | 'rubber' | 'oil';
+import {GOOD_VALUE_BY_MERGER_TYPE, mergerOptions, MergerType} from './types';
 
 interface BiddingData {
   companyAGoods: number;
@@ -29,17 +27,6 @@ interface BiddingData {
 interface PaymentDistribution {
   companyAShare: number;
   companyBShare: number;
-}
-
-const GOOD_VALUE_BY_MERGER_TYPE: Record<MergerType, number> = {
-  '': 0,
-  'shipping': 10,
-  'rice': 20,
-  'spice': 25,
-  'rice_spice': 25,
-  'siap_saji': 35,
-  'rubber': 30,
-  'oil': 40,
 }
 
 const INITIAL_DATA: BiddingData = {
