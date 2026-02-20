@@ -5,7 +5,8 @@
     </fudis-heading>
     <fudis-button
       [label]="'Reset'"
-      [variant]="'secondary'"
+      [variant]="'primary'"
+      [disabled]="!biddingForm().dirty()"
       (handleClick)="resetForm()"
     />
   </div>

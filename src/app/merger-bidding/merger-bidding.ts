@@ -144,6 +144,7 @@ export class MergerBidding {
   });
 
   resetForm() {
+    this.biddingForm().reset();
     this.biddingModel.set({...INITIAL_DATA});
     this.visibleBids.set(DEFAULT_VISIBLE_BIDS);
   }
