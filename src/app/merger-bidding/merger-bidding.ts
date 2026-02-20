@@ -1,4 +1,4 @@
-import {Component, computed, signal, untracked, WritableSignal} from '@angular/core';
+import {Component, computed, effect, ElementRef, signal, untracked, viewChild, WritableSignal} from '@angular/core';
 import {form, FormField} from "@angular/forms/signals";
 import {NgxFudisModule} from '@funidata/ngx-fudis';
 import {NumberInput} from '../number-input/number-input';
@@ -106,6 +106,8 @@ export class MergerBidding {
 
   protected readonly visibleBids = signal<number>(DEFAULT_VISIBLE_BIDS);
 
+  private readonly paymentDistributionCard = viewChild<ElementRef<HTMLDivElement>>('paymentDistributionCard');
+
   protected readonly validBids = computed<RadioButtonOption[]>(() => {
     const {companyAGoods, companyBGoods, mergerType} = this.biddingModel();
     if (companyAGoods === 0 || companyBGoods === 0 || mergerType === '') {
@@ -142,6 +144,14 @@ export class MergerBidding {
       companyBShare: (companyBGoods / totalGoods) * Number(winningBid),
     };
   });
+
+  constructor() {
+    effect(() => {
+      if (this.paymentDistribution() && this.paymentDistributionCard()) {
+        this.paymentDistributionCard()?.nativeElement?.scrollIntoView({behavior: 'smooth'});
+      }
+    });
+  }
 
   resetForm() {
     this.biddingForm().reset();
