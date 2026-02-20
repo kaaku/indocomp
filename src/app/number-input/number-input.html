@@ -13,4 +13,18 @@
     type="number"
     class="fudis-form-input fudis-text-input__input"
   />
+  @if ((dirty() || touched()) && errors().length > 0) {
+    <div class="fudis-guidance">
+      <div class="fudis-guidance__errors">
+        <fudis-icon [icon]="'alert-fill'"/>
+        <div class="fudis-guidance__errors__list">
+          @for (error of errors(); track error.kind) {
+            <p class="fudis-error-message fudis-error-message__form-error">
+              {{ error.message }}
+            </p>
+          }
+        </div>
+      </div>
+    </div>
+  }
 </div>
