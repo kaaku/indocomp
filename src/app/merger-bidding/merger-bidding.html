@@ -72,6 +72,13 @@
         </fudis-body-text>
       </fudis-grid>
     </div>
+    <fudis-button
+      [label]="'Reset'"
+      [variant]="'primary'"
+      (handleClick)="resetForm()"
+      fudisGridItem
+      [alignSelfX]="'center'"
+    />
   }
 </fudis-grid>
 

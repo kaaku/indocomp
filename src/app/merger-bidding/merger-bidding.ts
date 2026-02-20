@@ -1,4 +1,14 @@
-import {Component, computed, effect, ElementRef, signal, untracked, viewChild, WritableSignal} from '@angular/core';
+import {
+  Component,
+  computed, DOCUMENT,
+  effect,
+  ElementRef,
+  inject,
+  signal,
+  untracked,
+  viewChild,
+  WritableSignal
+} from '@angular/core';
 import {form, FormField} from "@angular/forms/signals";
 import {NgxFudisModule} from '@funidata/ngx-fudis';
 import {NumberInput} from '../number-input/number-input';
@@ -57,6 +67,8 @@ export class MergerBidding {
 
   protected readonly visibleBids = signal<number>(DEFAULT_VISIBLE_BIDS);
 
+  private readonly document = inject(DOCUMENT);
+
   private readonly paymentDistributionCard = viewChild<ElementRef<HTMLDivElement>>('paymentDistributionCard');
 
   protected readonly validBids = computed<RadioButtonOption[]>(() => {
@@ -108,6 +120,7 @@ export class MergerBidding {
     this.biddingForm().reset();
     this.biddingModel.set({...INITIAL_DATA});
     this.visibleBids.set(DEFAULT_VISIBLE_BIDS);
+    this.document.defaultView?.scrollTo({top: 0, behavior: 'smooth'});
   }
 
   onShowMoreBids() {
