@@ -1,11 +1,12 @@
 @use '@funidata/fudis-core' as core;
 
-.radio-button-image {
-  padding: core.$pixel-3;
+.radio-button-image-container {
+  padding: 4px;
   border-radius: var(--mat-sys-corner-small);
+  text-align: center;
 
-  &.selected {
-    padding: core.$pixel-1;
-    border: core.$pixel-2 solid var(--mat-sys-primary);
+  &__selected {
+    padding: 2px;
+    border: 2px solid var(--mat-sys-primary);
   }
 }

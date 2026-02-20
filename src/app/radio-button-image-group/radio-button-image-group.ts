@@ -8,7 +8,7 @@ export interface ImageOption {
   value: string;
   width: number;
   height: number;
-  alt: string;
+  label: string;
 }
 
 @Component({

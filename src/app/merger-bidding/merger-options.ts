@@ -6,48 +6,48 @@ export const mergerOptions: ImageOption[] = [
     path: 'img/shipping.png',
     width: 100,
     height: 100,
-    alt: 'Shipping Merger'
+    label: 'Shipping Merger'
   },
   {
     value: 'rice',
     path: 'img/rice.png',
     width: 100,
     height: 100,
-    alt: 'Rice Merger'
+    label: 'Rice Merger'
   },
   {
     value: 'spice',
     path: 'img/spice.png',
     width: 100,
     height: 100,
-    alt: 'Spice Merger'
+    label: 'Spice Merger'
   },
   {
     value: 'rice_spice',
     path: 'img/rice_spice.png',
     width: 100,
     height: 100,
-    alt: 'Rice & Spice Merger'
+    label: 'Rice & Spice Merger'
   },
   {
     value: 'siap_saji',
     path: 'img/siap_saji.png',
     width: 100,
     height: 100,
-    alt: 'Siap Saji Merger'
+    label: 'Siap Saji Merger'
   },
   {
     value: 'rubber',
     path: 'img/rubber.png',
     width: 100,
     height: 100,
-    alt: 'Rubber Merger'
+    label: 'Rubber Merger'
   },
   {
     value: 'oil',
     path: 'img/oil.png',
     width: 100,
     height: 100,
-    alt: 'Oil Merger'
+    label: 'Oil Merger'
   }
 ];
