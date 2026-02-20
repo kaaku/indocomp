@@ -1,4 +1,4 @@
-import {Component, computed, signal} from '@angular/core';
+import {Component, computed, signal, untracked, WritableSignal} from '@angular/core';
 import {form, FormField} from "@angular/forms/signals";
 import {NgxFudisModule} from '@funidata/ngx-fudis';
 import {NumberInput} from '../number-input/number-input';
@@ -114,10 +114,20 @@ export class MergerBidding {
 
     const totalGoods = companyAGoods + companyBGoods;
     const nominalValue = GOOD_VALUE_BY_MERGER_TYPE[mergerType] * totalGoods;
-    return [
+    const newValidBids = [
       nominalValue,
       ...Array.from({length: this.visibleBids()}).map((_, i) => nominalValue + (i + 1) * totalGoods),
     ].map(bid => ({label: `${bid} rp`, value: bid.toString()}));
+
+    untracked(() => {
+      // Check the validity of the current winning bid against the new valid bids and reset it if it's no longer valid
+      const currentWinningBid: WritableSignal<string> = this.biddingForm.winningBid().value;
+      if (currentWinningBid() && !newValidBids.some(option => option.value === currentWinningBid())) {
+        currentWinningBid.set('');
+      }
+    });
+
+    return newValidBids;
   });
 
   protected readonly paymentDistribution = computed<PaymentDistribution | null>(() => {
