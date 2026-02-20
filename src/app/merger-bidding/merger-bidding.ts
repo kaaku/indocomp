@@ -42,8 +42,8 @@ const GOOD_VALUE_BY_MERGER_TYPE: Record<MergerType, number> = {
 }
 
 const INITIAL_DATA: BiddingData = {
-  companyAGoods: 0,
-  companyBGoods: 0,
+  companyAGoods: NaN,
+  companyBGoods: NaN,
   mergerType: '',
   winningBid: '',
 }
@@ -73,7 +73,7 @@ export class MergerBidding {
 
   protected readonly validBids = computed<RadioButtonOption[]>(() => {
     const {companyAGoods, companyBGoods, mergerType} = this.biddingModel();
-    if (companyAGoods === 0 || companyBGoods === 0 || mergerType === '') {
+    if (!companyAGoods || !companyBGoods || !mergerType) {
       return [];
     }
 
@@ -97,7 +97,7 @@ export class MergerBidding {
 
   protected readonly paymentDistribution = computed<PaymentDistribution | null>(() => {
     const {companyAGoods, companyBGoods, winningBid} = this.biddingModel();
-    if (companyAGoods === 0 || companyBGoods === 0 || winningBid === '') {
+    if (!companyAGoods || !companyBGoods || !winningBid) {
       return null;
     }
 
