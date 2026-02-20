@@ -6,16 +6,14 @@
   justify-content: space-between;
 }
 
-form {
-  fieldset {
-    background-color: var(--mat-sys-primary-container);
-    border: solid core.$pixel-1 var(--mat-sys-outline-variant);
-    border-radius: var(--mat-sys-corner-small);
-    padding: core.$spacing-sm;
+.card {
+  background-color: var(--mat-sys-primary-container);
+  border: solid core.$pixel-1 var(--mat-sys-outline-variant);
+  border-radius: var(--mat-sys-corner-small);
+  padding: core.$spacing-sm;
 
-    legend {
-      font-weight: 500;
-      margin-bottom: core.$spacing-xs;
-    }
+  &__heading {
+    font-weight: 500;
+    margin-bottom: core.$spacing-xs;
   }
 }

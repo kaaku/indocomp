@@ -12,9 +12,9 @@
   </div>
   <form>
     <fudis-grid>
-      <fieldset>
+      <fieldset class="card">
         <fudis-grid [rowGap]="'xs'">
-          <legend>Merger type</legend>
+          <legend class="card__heading">Merger type</legend>
           <app-radio-button-image-group
             [formField]="biddingForm.mergerType"
             [options]="mergerOptions"
@@ -22,9 +22,9 @@
           />
         </fudis-grid>
       </fieldset>
-      <fieldset>
+      <fieldset class="card">
         <fudis-grid [columns]="2" [rowGap]="'xs'">
-          <legend fudisGridItem [columns]="2">Amount of ships/plantations</legend>
+          <legend class="card__heading" fudisGridItem [columns]="2">Amount of ships/plantations</legend>
           <app-number-input
             [label]="'Company A'"
             [formField]="biddingForm.companyAGoods"
@@ -36,9 +36,9 @@
         </fudis-grid>
       </fieldset>
       @if (validBids().length > 0) {
-        <fieldset>
+        <fieldset class="card">
           <fudis-grid [rowGap]="'xs'">
-            <legend>Valid bids</legend>
+            <legend class="card__heading">Valid bids</legend>
             <app-radio-button-group
               [formField]="biddingForm.winningBid"
               [options]="validBids()"
@@ -60,12 +60,18 @@
     <fudis-heading [level]="2">
       Payment distribution
     </fudis-heading>
-    <fudis-body-text>
-      Owner of company A gets <strong>{{ paymentDistribution()?.companyAShare }} rp</strong>
-    </fudis-body-text>
-    <fudis-body-text>
-      Owner of company B gets <strong>{{ paymentDistribution()?.companyBShare }} rp</strong>
-    </fudis-body-text>
+    <div class="card">
+      <fudis-grid [columns]="2" [rowGap]="'sm'">
+        <fudis-heading [level]="3" fudisGridItem>Company A</fudis-heading>
+        <fudis-heading [level]="3" fudisGridItem>Company B</fudis-heading>
+        <fudis-body-text [variant]="'lg-regular'">
+          Owner gets <strong>{{ paymentDistribution()?.companyAShare }} rp</strong>
+        </fudis-body-text>
+        <fudis-body-text [variant]="'lg-regular'">
+          Owner gets <strong>{{ paymentDistribution()?.companyBShare }} rp</strong>
+        </fudis-body-text>
+      </fudis-grid>
+    </div>
   }
 </fudis-grid>
 
