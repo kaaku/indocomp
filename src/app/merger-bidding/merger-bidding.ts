@@ -1,6 +1,7 @@
 import {
   Component,
-  computed, DOCUMENT,
+  computed,
+  DOCUMENT,
   effect,
   ElementRef,
   inject,
@@ -9,7 +10,7 @@ import {
   viewChild,
   WritableSignal
 } from '@angular/core';
-import {form, FormField} from "@angular/forms/signals";
+import {form, FormField, max, min, required} from "@angular/forms/signals";
 import {NgxFudisModule} from '@funidata/ngx-fudis';
 import {NumberInput} from '../number-input/number-input';
 import {RadioButtonGroup, RadioButtonOption} from '../radio-button-group/radio-button-group';
@@ -63,7 +64,16 @@ export class MergerBidding {
 
   private readonly biddingModel = signal<BiddingData>({...INITIAL_DATA});
 
-  protected readonly biddingForm = form(this.biddingModel);
+  protected readonly biddingForm = form(this.biddingModel, (schema) => {
+    min(schema.companyAGoods, 1, {message: 'Minimum 1 ship/plantation'});
+    min(schema.companyBGoods, 1, {message: 'Minimum 1 ship/plantation'});
+    max(schema.companyAGoods, 50, {message: 'Maximum 50 ships/plantations'});
+    max(schema.companyBGoods, 50, {message: 'Maximum 50 ships/plantations'});
+    required(schema.companyAGoods);
+    required(schema.companyBGoods);
+    required(schema.mergerType);
+    required(schema.winningBid);
+  });
 
   protected readonly visibleBids = signal<number>(DEFAULT_VISIBLE_BIDS);
 
@@ -72,11 +82,12 @@ export class MergerBidding {
   private readonly paymentDistributionCard = viewChild<ElementRef<HTMLDivElement>>('paymentDistributionCard');
 
   protected readonly validBids = computed<RadioButtonOption[]>(() => {
-    const {companyAGoods, companyBGoods, mergerType} = this.biddingModel();
-    if (!companyAGoods || !companyBGoods || !mergerType) {
+    const form = this.biddingForm;
+    if (!form.companyAGoods().valid() || !form.companyBGoods().valid() || !form.mergerType().valid()) {
       return [];
     }
 
+    const {companyAGoods, companyBGoods, mergerType} = this.biddingModel();
     const totalGoods = companyAGoods + companyBGoods;
     const nominalValue = GOOD_VALUE_BY_MERGER_TYPE[mergerType] * totalGoods;
     const newValidBids = [
@@ -96,11 +107,11 @@ export class MergerBidding {
   });
 
   protected readonly paymentDistribution = computed<PaymentDistribution | null>(() => {
-    const {companyAGoods, companyBGoods, winningBid} = this.biddingModel();
-    if (!companyAGoods || !companyBGoods || !winningBid) {
+    if (!this.biddingForm().valid()) {
       return null;
     }
 
+    const {companyAGoods, companyBGoods, winningBid} = untracked(() => this.biddingModel());
     const totalGoods = companyAGoods + companyBGoods;
     return {
       companyAShare: (companyAGoods / totalGoods) * Number(winningBid),

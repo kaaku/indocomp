@@ -10,7 +10,7 @@
       (handleClick)="resetForm()"
     />
   </div>
-  <form>
+  <form novalidate>
     <fudis-grid>
       <fieldset class="card">
         <fudis-grid [rowGap]="'xs'">
@@ -28,14 +28,14 @@
           <app-number-input
             [label]="'Company A'"
             [formField]="biddingForm.companyAGoods"
-            [minValue]="1"
-            [maxValue]="50"
+            [minValue]="biddingForm.companyAGoods()?.min()"
+            [maxValue]="biddingForm.companyAGoods()?.max()"
           />
           <app-number-input
             [label]="'Company B'"
             [formField]="biddingForm.companyBGoods"
-            [minValue]="1"
-            [maxValue]="50"
+            [minValue]="biddingForm.companyBGoods()?.min()"
+            [maxValue]="biddingForm.companyBGoods()?.max()"
           />
         </fudis-grid>
       </fieldset>
