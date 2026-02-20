@@ -28,10 +28,14 @@
           <app-number-input
             [label]="'Company A'"
             [formField]="biddingForm.companyAGoods"
+            [minValue]="1"
+            [maxValue]="50"
           />
           <app-number-input
             [label]="'Company B'"
             [formField]="biddingForm.companyBGoods"
+            [minValue]="1"
+            [maxValue]="50"
           />
         </fudis-grid>
       </fieldset>

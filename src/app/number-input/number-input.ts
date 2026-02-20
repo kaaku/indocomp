@@ -11,6 +11,8 @@ import {generateRandomId} from '../utils';
 export class NumberInput implements FormValueControl<number> {
   readonly label = input.required<string>();
   readonly value = model<number>(0);
+  readonly minValue = input<number>();
+  readonly maxValue = input<number>();
 
   protected readonly id = generateRandomId();
 

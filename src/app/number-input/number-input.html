@@ -8,6 +8,8 @@
     [value]="value()"
     (input)="onInput($event)"
     [attr.id]="id"
+    [attr.min]="minValue()"
+    [attr.max]="maxValue()"
     type="number"
     class="fudis-form-input fudis-text-input__input"
   />
