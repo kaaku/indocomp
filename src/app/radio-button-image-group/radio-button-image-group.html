@@ -15,16 +15,16 @@
             }
           </div>
         </div>
-        <span class="fudis-radio-button__label">
-          <img
-            [ngSrc]="option.path"
-            [width]="option.width"
-            [height]="option.height"
-            [priority]="true"
-            [alt]="option.alt"
-            (click)="value.set(option.value)"
-          />
-        </span>
+        <img
+          [ngSrc]="option.path"
+          [width]="option.width"
+          [height]="option.height"
+          [priority]="true"
+          [alt]="option.alt"
+          class="radio-button-image"
+          [class.selected]="value() === option.value"
+          (click)="value.set(option.value)"
+        />
       </div>
     </label>
   }
