@@ -36,8 +36,7 @@ const INITIAL_DATA: BiddingData = {
   winningBid: '',
 }
 
-const DEFAULT_VISIBLE_BIDS = 40;
-const VISIBLE_BIDS_INCREMENT = 20;
+const VISIBLE_BIDS_BLOCK_SIZE = 10;
 
 @Component({
   selector: 'app-merger-bidding',
@@ -62,7 +61,7 @@ export class MergerBidding {
     required(schema.winningBid);
   });
 
-  protected readonly visibleBids = signal<number>(DEFAULT_VISIBLE_BIDS);
+  protected readonly visibleBids = signal<number>(VISIBLE_BIDS_BLOCK_SIZE);
 
   private readonly document = inject(DOCUMENT);
 
@@ -117,11 +116,11 @@ export class MergerBidding {
   resetForm() {
     this.biddingForm().reset();
     this.biddingModel.set({...INITIAL_DATA});
-    this.visibleBids.set(DEFAULT_VISIBLE_BIDS);
+    this.visibleBids.set(VISIBLE_BIDS_BLOCK_SIZE);
     this.document.defaultView?.scrollTo({top: 0, behavior: 'smooth'});
   }
 
   onShowMoreBids() {
-    this.visibleBids.update(current => current + VISIBLE_BIDS_INCREMENT);
+    this.visibleBids.update(current => current + VISIBLE_BIDS_BLOCK_SIZE);
   }
 }
