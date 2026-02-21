@@ -98,7 +98,7 @@ export class MergerBidding {
       return null;
     }
 
-    const {companyAGoods, companyBGoods, winningBid} = untracked(() => this.biddingModel());
+    const {companyAGoods, companyBGoods, winningBid} = this.biddingModel();
     const totalGoods = companyAGoods + companyBGoods;
     return {
       companyAShare: (companyAGoods / totalGoods) * Number(winningBid),
