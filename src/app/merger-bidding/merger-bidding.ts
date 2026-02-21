@@ -107,7 +107,8 @@ export class MergerBidding {
 
   constructor() {
     effect(() => {
-      if (this.paymentDistribution() && this.paymentDistributionCard()) {
+      const winningBid = this.biddingForm.winningBid();
+      if (winningBid.value() && winningBid.valid() && this.paymentDistributionCard()) {
         this.paymentDistributionCard()?.nativeElement?.scrollIntoView({behavior: 'smooth'});
       }
     });
