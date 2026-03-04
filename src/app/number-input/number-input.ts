@@ -11,8 +11,8 @@ import {NgxFudisModule} from '@funidata/ngx-fudis';
 export class NumberInput implements FormValueControl<number> {
   readonly label = input.required<string>();
   readonly value = model<number>(0);
-  readonly minValue = input<number>();
-  readonly maxValue = input<number>();
+  readonly min = input<number | undefined>();
+  readonly max = input<number | undefined>();
 
   readonly dirty = input<boolean>(false);
   readonly touched = model<boolean>(false);
