@@ -57,8 +57,8 @@ export class MergerBidding {
       min(schema.companyBGoods, 1, {message: 'Minimum 1 ship/plantation'});
       max(schema.companyAGoods, 50, {message: 'Maximum 50 ships/plantations'});
       max(schema.companyBGoods, 50, {message: 'Maximum 50 ships/plantations'});
-      required(schema.companyAGoods);
-      required(schema.companyBGoods);
+      required(schema.companyAGoods, {message: 'Required input'});
+      required(schema.companyBGoods, {message: 'Required input'});
       required(schema.mergerType);
       required(schema.winningBid);
     },
