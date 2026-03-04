@@ -7,7 +7,6 @@ import {NgxFudisModule} from '@funidata/ngx-fudis';
   selector: 'app-number-input',
   imports: [NgxFudisModule],
   templateUrl: './number-input.html',
-  styleUrl: './number-input.scss',
 })
 export class NumberInput implements FormValueControl<number> {
   readonly label = input.required<string>();

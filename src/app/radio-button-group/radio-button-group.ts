@@ -13,7 +13,6 @@ export interface RadioButtonOption {
     NgxFudisModule
   ],
   templateUrl: './radio-button-group.html',
-  styleUrl: './radio-button-group.scss',
 })
 export class RadioButtonGroup implements FormValueControl<string> {
   readonly options = input.required<RadioButtonOption[]>();
