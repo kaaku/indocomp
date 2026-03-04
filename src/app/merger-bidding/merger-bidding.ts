@@ -121,7 +121,7 @@ export class MergerBidding {
     this.document.defaultView?.scrollTo({top: 0, behavior: 'smooth'});
   }
 
-  onShowMoreBids() {
+  showMoreBids() {
     this.visibleBids.update(current => current + VISIBLE_BIDS_BLOCK_SIZE);
   }
 }
