@@ -1,5 +1,5 @@
-import {Component, input, model} from '@angular/core';
-import {FormValueControl} from '@angular/forms/signals';
+import {Component, input} from '@angular/core';
+import {FieldTree, FormField} from '@angular/forms/signals';
 import {NgxFudisModule} from '@funidata/ngx-fudis';
 
 export interface RadioButtonOption {
@@ -10,11 +10,12 @@ export interface RadioButtonOption {
 @Component({
   selector: 'app-radio-button-group',
   imports: [
-    NgxFudisModule
+    NgxFudisModule,
+    FormField
   ],
   templateUrl: './radio-button-group.html',
 })
-export class RadioButtonGroup implements FormValueControl<string> {
+export class RadioButtonGroup {
+  readonly field = input.required<FieldTree<string>>();
   readonly options = input.required<RadioButtonOption[]>();
-  readonly value = model<string>('');
 }

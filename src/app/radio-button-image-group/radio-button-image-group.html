@@ -1,35 +1,36 @@
-<fudis-grid [columns]="columns()">
-  @for (option of options(); track option.value) {
-    <label class="fudis-radio-button">
-      <input
-        [value]="option.value"
-        (input)="value.set(option.value)"
-        type="radio"
-        class="fudis-radio-button__input"
-      />
-      <div class="fudis-radio-button__content">
-        <div class="fudis-radio-button__content-wrapper" (click)="value.set(option.value)">
-          <div class="fudis-radio-button__content__control">
-            @if (value() === option.value) {
-              <span class="fudis-radio-button__content__control__indicator"></span>
-            }
+@if (field(); as field) {
+  <fudis-grid [columns]="columns()">
+    @for (option of options(); track option.value) {
+      <label class="fudis-radio-button">
+        <input
+          [formField]="field"
+          [value]="option.value"
+          type="radio"
+          class="fudis-radio-button__input"
+        />
+        <div class="fudis-radio-button__content">
+          <div class="fudis-radio-button__content-wrapper">
+            <div class="fudis-radio-button__content__control">
+              @if (field().value() === option.value) {
+                <span class="fudis-radio-button__content__control__indicator"></span>
+              }
+            </div>
+          </div>
+          <div
+            class="radio-button-image-container"
+            [class.radio-button-image-container__selected]="field().value() === option.value"
+          >
+            <img
+              [ngSrc]="option.path"
+              [width]="option.width"
+              [height]="option.height"
+              [priority]="true"
+              [alt]="option.label"
+            />
+            <fudis-body-text [align]="'center'">{{ option.label }}</fudis-body-text>
           </div>
         </div>
-        <div
-          class="radio-button-image-container"
-          [class.radio-button-image-container__selected]="value() === option.value"
-        >
-          <img
-            [ngSrc]="option.path"
-            [width]="option.width"
-            [height]="option.height"
-            [priority]="true"
-            [alt]="option.label"
-            (click)="value.set(option.value)"
-          />
-          <fudis-body-text [align]="'center'">{{ option.label }}</fudis-body-text>
-        </div>
-      </div>
-    </label>
-  }
-</fudis-grid>
+      </label>
+    }
+  </fudis-grid>
+}

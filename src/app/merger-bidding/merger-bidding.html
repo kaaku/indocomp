@@ -16,7 +16,7 @@
         <fudis-grid [rowGap]="'xs'">
           <legend class="card__heading">Merger type</legend>
           <app-radio-button-image-group
-            [formField]="biddingForm.mergerType"
+            [field]="biddingForm.mergerType"
             [options]="mergerOptions"
             [columns]="{xs: 2, md: 3}"
           />
@@ -44,7 +44,7 @@
           <fudis-grid [rowGap]="'xs'">
             <legend class="card__heading">Valid bids</legend>
             <app-radio-button-group
-              [formField]="biddingForm.winningBid"
+              [field]="biddingForm.winningBid"
               [options]="validBids()"
             />
             <fudis-button
