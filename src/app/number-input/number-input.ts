@@ -1,5 +1,5 @@
 import {Component, input, model} from '@angular/core';
-import {FormValueControl, ValidationError, WithOptionalField} from '@angular/forms/signals';
+import {FormValueControl, ValidationError, WithOptionalFieldTree} from '@angular/forms/signals';
 import {generateRandomId} from '../utils';
 import {NgxFudisModule} from '@funidata/ngx-fudis';
 
@@ -16,7 +16,7 @@ export class NumberInput implements FormValueControl<number> {
 
   readonly dirty = input<boolean>(false);
   readonly touched = model<boolean>(false);
-  readonly errors = input<readonly WithOptionalField<ValidationError>[]>([]);
+  readonly errors = input<readonly WithOptionalFieldTree<ValidationError>[]>([]);
 
   protected readonly id = generateRandomId();
 
