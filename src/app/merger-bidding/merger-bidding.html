@@ -10,7 +10,7 @@
       (handleClick)="resetForm()"
     />
   </div>
-  <form novalidate>
+  <form [formRoot]="biddingForm">
     <fudis-grid>
       <fieldset class="card">
         <fudis-grid [rowGap]="'xs'">
@@ -40,7 +40,7 @@
         </fudis-grid>
       </fieldset>
       @if (validBids().length > 0) {
-        <fieldset class="card">
+        <fieldset class="card" #validBidsCard>
           <fudis-grid [rowGap]="'xs'">
             <legend class="card__heading">Valid bids</legend>
             <app-radio-button-group
@@ -57,6 +57,14 @@
             />
           </fudis-grid>
         </fieldset>
+      } @else {
+        <fudis-button
+          [label]="'Continue'"
+          [variant]="'primary'"
+          [type]="'submit'"
+          fudisGridItem
+          [alignSelfX]="'center'"
+        />
       }
     </fudis-grid>
   </form>

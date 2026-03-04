@@ -10,7 +10,7 @@ import {
   viewChild,
   WritableSignal
 } from '@angular/core';
-import {form, FormField, max, min, required} from "@angular/forms/signals";
+import {form, FormField, FormRoot, max, min, required} from "@angular/forms/signals";
 import {NgxFudisModule} from '@funidata/ngx-fudis';
 import {NumberInput} from '../number-input/number-input';
 import {RadioButtonGroup, RadioButtonOption} from '../radio-button-group/radio-button-group';
@@ -40,7 +40,7 @@ const VISIBLE_BIDS_BLOCK_SIZE = 10;
 
 @Component({
   selector: 'app-merger-bidding',
-  imports: [NgxFudisModule, FormField, NumberInput, RadioButtonGroup, RadioButtonImageGroup],
+  imports: [NgxFudisModule, FormField, FormRoot, NumberInput, RadioButtonGroup, RadioButtonImageGroup],
   templateUrl: './merger-bidding.html',
   styleUrl: './merger-bidding.scss',
 })
@@ -50,26 +50,33 @@ export class MergerBidding {
 
   private readonly biddingModel = signal<BiddingData>({...INITIAL_DATA});
 
-  protected readonly biddingForm = form(this.biddingModel, (schema) => {
-    min(schema.companyAGoods, 1, {message: 'Minimum 1 ship/plantation'});
-    min(schema.companyBGoods, 1, {message: 'Minimum 1 ship/plantation'});
-    max(schema.companyAGoods, 50, {message: 'Maximum 50 ships/plantations'});
-    max(schema.companyBGoods, 50, {message: 'Maximum 50 ships/plantations'});
-    required(schema.companyAGoods);
-    required(schema.companyBGoods);
-    required(schema.mergerType);
-    required(schema.winningBid);
-  });
+  protected readonly biddingForm = form(
+    this.biddingModel,
+    (schema) => {
+      min(schema.companyAGoods, 1, {message: 'Minimum 1 ship/plantation'});
+      min(schema.companyBGoods, 1, {message: 'Minimum 1 ship/plantation'});
+      max(schema.companyAGoods, 50, {message: 'Maximum 50 ships/plantations'});
+      max(schema.companyBGoods, 50, {message: 'Maximum 50 ships/plantations'});
+      required(schema.companyAGoods);
+      required(schema.companyBGoods);
+      required(schema.mergerType);
+      required(schema.winningBid);
+    },
+    // Dummy submit action that simply causes fields to become touched and clears debounce timers
+    {submission: {action: () => Promise.resolve()}},
+  );
 
   protected readonly visibleBids = signal<number>(VISIBLE_BIDS_BLOCK_SIZE);
 
   private readonly document = inject(DOCUMENT);
 
+  private readonly validBidsCard = viewChild<ElementRef<HTMLDivElement>>('validBidsCard');
   private readonly paymentDistributionCard = viewChild<ElementRef<HTMLDivElement>>('paymentDistributionCard');
 
   protected readonly validBids = computed<RadioButtonOption[]>(() => {
     const form = this.biddingForm;
-    if (!form.companyAGoods().valid() || !form.companyBGoods().valid() || !form.mergerType().valid()) {
+    const relevantFields = [form.mergerType(), form.companyAGoods(), form.companyBGoods()];
+    if (relevantFields.some(field => !(field.valid() && field.touched()))) {
       return [];
     }
 
@@ -107,8 +114,13 @@ export class MergerBidding {
 
   constructor() {
     effect(() => {
-      const winningBid = this.biddingForm.winningBid();
-      if (winningBid.value() && winningBid.valid() && this.paymentDistributionCard()) {
+      if (this.validBidsCard()) {
+        this.validBidsCard()?.nativeElement?.scrollIntoView({behavior: 'smooth'});
+      }
+    });
+
+    effect(() => {
+      if (this.paymentDistributionCard()) {
         this.paymentDistributionCard()?.nativeElement?.scrollIntoView({behavior: 'smooth'});
       }
     });
