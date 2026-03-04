@@ -15,7 +15,7 @@ export class NumberInput implements FormValueControl<number> {
   readonly maxValue = input<number>();
 
   readonly dirty = input<boolean>(false);
-  readonly touched = input<boolean>(false);
+  readonly touched = model<boolean>(false);
   readonly errors = input<readonly WithOptionalField<ValidationError>[]>([]);
 
   protected readonly id = generateRandomId();
