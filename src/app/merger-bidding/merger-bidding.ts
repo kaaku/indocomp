@@ -114,8 +114,10 @@ export class MergerBidding {
 
   constructor() {
     effect(() => {
-      if (this.validBidsCard()) {
-        this.validBidsCard()?.nativeElement?.scrollIntoView({behavior: 'smooth'});
+      const validBidsContainer: HTMLDivElement | undefined = this.validBidsCard()?.nativeElement;
+      if (validBidsContainer) {
+        validBidsContainer.scrollIntoView({behavior: 'smooth'});
+        (validBidsContainer.querySelector('input[type=radio]') as HTMLInputElement | null)?.focus();
       }
     });
 
