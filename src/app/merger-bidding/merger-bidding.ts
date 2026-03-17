@@ -107,8 +107,8 @@ export class MergerBidding {
     const {companyAGoods, companyBGoods, winningBid} = this.biddingModel();
     const totalGoods = companyAGoods + companyBGoods;
     return {
-      companyAShare: (companyAGoods / totalGoods) * Number(winningBid),
-      companyBShare: (companyBGoods / totalGoods) * Number(winningBid),
+      companyAShare: Math.round((companyAGoods / totalGoods) * Number(winningBid)),
+      companyBShare: Math.round((companyBGoods / totalGoods) * Number(winningBid)),
     };
   });
 
